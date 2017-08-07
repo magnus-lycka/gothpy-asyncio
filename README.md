@@ -27,3 +27,6 @@ Notes:
    - https://docs.python.org/3/library/asyncio-eventloops.html
    - https://github.com/MagicStack/uvloop
    
+"Man that thing is complex and it keeps getting more complex. I do not have the mental capacity to casually work with asyncio."
+ -- Armin Ronacher
+ 
