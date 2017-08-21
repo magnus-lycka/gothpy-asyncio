@@ -78,6 +78,22 @@ Idea...
 
 {{ layout.set() }}
 
+Standard library smtpd
+======================
+
+This module offers several classes to implement SMTP (email) servers.
+---------------------------------------------------------------------
+
+
+*The aiosmtpd package is a recommended replacement for this module. It is based on asyncio and provides a more straightforward API. smtpd should be considered deprecated.*
+
+Asyncio???
+----------
+
+----
+
+{{ layout.set() }}
+
 
 mail2alert - simplified sequence diagram
 ========================================
@@ -100,22 +116,6 @@ mail2alert - simplified sequence diagram
        | |       ACK | |<--------------------------| |
        | |<----------+ |                           +-+
        +-+           +-+
-
-----
-
-{{ layout.set() }}
-
-Standard library smtpd
-======================
-
-This module offers several classes to implement SMTP (email) servers.
----------------------------------------------------------------------
-
-
-*The aiosmtpd package is a recommended replacement for this module. It is based on asyncio and provides a more straightforward API. smtpd should be considered deprecated.*
-
-Asyncio???
-----------
 
 ----
 
