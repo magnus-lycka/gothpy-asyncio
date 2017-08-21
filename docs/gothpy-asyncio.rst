@@ -3,11 +3,10 @@
 :css: gothpy-asyncio.css
 :skip-help: true
 
-
 ----
 
-:data-scale: 6
-
+{{ layout.set() }}
+{{ layout.children(6, 6, skip=[(1, 2), (2, 2), (3, 2), (4, 2), (1, 3), (2, 3), (3, 3), (4, 3)]) }}
 
 Coroutines with async and await
 ===============================
@@ -24,12 +23,9 @@ Magnus_ Lyckå_
 .. _Magnus: https://github.com/magnus-lycka
 .. _Lyckå: https://www.linkedin.com/in/lycka/
 
-
 ----
 
-:data-scale: 1
-:data-x: -4000
-:data-y: -2500
+{{ layout.set() }}
 
 GoCD notifications weren't enough...
 ====================================
@@ -47,9 +43,7 @@ GoCD notifications weren't enough...
 
 ----
 
-:data-rotate: 180
-:data-x: r2000
-:data-y: r0
+{{ layout.set(data_rotate=180) }}
 
 Jag fick en liten idé...
 ========================
@@ -62,8 +56,7 @@ Jag fick en liten idé...
 
 ----
 
-:data-rotate: 0
-
+{{ layout.set(data_rotate=0) }}
 
 Idea...
 =======
@@ -81,8 +74,10 @@ Idea...
 
 .. _mail2alert: https://github.com/magnus-lycka/mail2alert
 
-
 ----
+
+{{ layout.set() }}
+
 
 mail2alert - simplified sequence diagram
 ========================================
@@ -108,6 +103,24 @@ mail2alert - simplified sequence diagram
 
 ----
 
+{{ layout.set() }}
+
+Standard library smtpd
+======================
+
+This module offers several classes to implement SMTP (email) servers.
+---------------------------------------------------------------------
+
+
+*The aiosmtpd package is a recommended replacement for this module. It is based on asyncio and provides a more straightforward API. smtpd should be considered deprecated.*
+
+Asyncio???
+----------
+
+----
+
+{{ layout.set() }}
+
 Concurrent execution of multiple tasks
 ======================================
 
@@ -125,8 +138,26 @@ Concurrent execution of multiple tasks
 
 ----
 
-:data-x: r-8000
-:data-y: r1000
+{{ layout.set() }}
+
+Coroutine benefits compared with...
+===================================
+
+Processes
+    Much less overhead. Always switch context at optimal time.
+
+Threads
+    Less overhead. Easier to debug. Always switch context at optimal time.
+
+Callbacks
+    Source code easier to read. Flows like non-concurrent code.
+
+*But it can only utilize one CPU core!*
+---------------------------------------
+
+----
+
+{{ layout.set() }}
 
 Functions, Generators, Coroutines
 =================================
@@ -152,8 +183,7 @@ Functions, Generators, Coroutines
 
 ----
 
-:data-x: r2000
-:data-y: r0
+{{ layout.set() }}
 
 Python Function
 ===============
@@ -170,6 +200,8 @@ Python Function
     >>>
 
 ----
+
+{{ layout.set() }}
 
 Python Generator
 ================
@@ -197,6 +229,8 @@ Python Generator
 
 ----
 
+{{ layout.set() }}
+
 Python 3.5+ coroutine
 =====================
 
@@ -220,10 +254,9 @@ Python 3.5+ coroutine
     94327.881889242 94330.884326
     >>>
 
-
 ----
 
-:data-transition-duration: 0
+{{ layout.set() }}
 
 Python 3.4 coroutine
 ====================
@@ -253,10 +286,7 @@ Python 3.4 coroutine
 
 ----
 
-
-:data-x: r-8000
-:data-y: r1200
-:data-rotate: 30
+{{ layout.set() }}
 
 Timeline
 ========
@@ -266,13 +296,12 @@ Timeline
 * Python 3.4: asyncio (provisional), @asyncio.coroutine & yield from
 * Python 3.5: async & await syntax
 * Python 3.6: asyncio extended & stable. Async generators & comprehensions.
-
+* Python 3.7: ??? (Simplifications and better docs?) https://www.youtube.com/watch?v=2ZFFv-wZ8_g
 
 ----
 
-:data-x: r8000
-:data-y: r0
-:data-rotate: 45
+{{ layout.set() }}
+{{ layout.children(6, 11, use=[(2, 3), (3, 3), (4, 3), (5, 3), (2, 4), (2, 5), (3, 5), (4, 5), (3, 6), (3,7), (3, 8)]) }}
 
 Asyncio concepts
 ================
@@ -288,9 +317,7 @@ Asyncio concepts
 
 ----
 
-:data-x: r-8000
-:data-y: r1200
-:data-rotate: -45
+{{ layout.set() }}
 
 Event Loops
 ===========
@@ -313,9 +340,32 @@ Event Loops
 
 ----
 
-:data-x: r8000
-:data-y: r0
-:data-rotate: -45
+{{ layout.set() }}
+
+Event Loop objects
+==================
+
+.. code:: python
+
+    loop = asyncio.get_event_loop()
+
+    loop.run_until_complete( coroutine or task )
+
+    loop.run_forever()
+
+    loop.call_*( function, *args)
+
+    loop.time()
+
+    loop.stop()
+
+    loop.close()
+
+    ....
+
+----
+
+{{ layout.set() }}
 
 Event Loop Hello World
 ======================
@@ -339,9 +389,7 @@ Event Loop Hello World
 
 ----
 
-:data-x: r-8000
-:data-y: r1200
-:data-rotate: 0
+{{ layout.set() }}
 
 uvloop
 ======
@@ -356,9 +404,7 @@ https://github.com/MagicStack/uvloop
 
 ----
 
-:data-x: r2000
-:data-y: r0
-
+{{ layout.set() }}
 
 Transports & Protocols
 ======================
@@ -378,11 +424,14 @@ There are examples_ in the docs.
 
 ----
 
+{{ layout.set() }}
+
 Futures
 =======
 
 * Encapsulates the asynchronous execution of a callable.
 * Almost compatible with concurrent.futures.Future.
+* Methods: .cancel(), .cancelled(), .set_result(), .result(), .done()
 
 .. code:: python
 
@@ -401,6 +450,8 @@ Futures
 
 ----
 
+{{ layout.set() }}
+
 Tasks
 =====
 
@@ -415,6 +466,51 @@ When the future is done, the execution of the wrapped coroutine restarts with
 the result or the exception of the future."
 
 ----
+
+{{ layout.set() }}
+{{ layout.children(3, 3, use=[(1, 2)]) }}
+
+Handle
+======
+
+class asyncio.Handle
+    A callback wrapper object returned by loop.call_soon(), loop.call_soon_threadsafe(), loop.call_later(), and loop.call_at().
+
+cancel()
+    Cancel the call. If the callback is already canceled or executed, this method has no effect.
+
+----
+
+{{ layout.set() }}
+
+
+Event Loop Hello World
+======================
+
+.. code:: python
+
+    import asyncio
+
+    def hello_world(loop):
+        print('Hello World')
+        loop.stop()
+
+    loop = asyncio.get_event_loop()
+
+    # Schedule a call to hello_world()
+    handle = loop.call_soon(hello_world, loop)
+
+    # we could...
+    handle.cancel()
+
+    # Blocking call interrupted by loop.stop()
+    loop.run_forever()
+    loop.close()
+
+
+----
+
+{{ layout.set() }}
 
 Async generators and comprehension
 ==================================
@@ -436,8 +532,8 @@ Async generators and comprehension
 
 ----
 
-:data-x: r-8000
-:data-y: r1000
+{{ layout.set() }}
+
 
 Synchronization primitives
 ==========================
@@ -457,8 +553,7 @@ they aren't needed so often.
 
 ----
 
-:data-x: r2000
-:data-y: r0
+{{ layout.set() }}
 
 Threadpool interface
 ====================
@@ -474,6 +569,65 @@ a concurrent.futures.ProcessPoolExecutor.
     loop.run_in_executor(executor, func, *args)
 
 ----
+
+{{ layout.set() }}
+
+Asynchronous Context Managers
+=============================
+
+A context manager which is able to suspend execution in its enter and exit methods.
+
+.. code:: python
+
+    class AsyncContextManager:
+        async def __aenter__(self):
+            await log('entering context')
+
+        async def __aexit__(self, exc_type, exc, tb):
+            await log('exiting context')
+
+...
+
+.. code:: python
+
+    async def commit(session, data):
+        ...
+
+        async with session.transaction():
+            ...
+            await session.update(data)
+            ...
+
+----
+
+{{ layout.set() }}
+
+Don't use blocking I/O!
+=======================
+
+* No socket.*
+* No select.*
+* No subprocess.*
+* No os.waitpid
+* No threading.*
+* No multiprocessing.*
+* No time.sleep
+
+*Use async replacements!*
+
+----
+
+{{ layout.set() }}
+
+Split up all long loops!
+========================
+
+*Or use the threadpool etc*
+---------------------------
+
+----
+
+{{ layout.set() }}
 
 Too confusing?
 ==============
@@ -491,21 +645,172 @@ http://lucumr.pocoo.org/2016/10/30/i-dont-understand-asyncio/
 
 ----
 
-Example: mail2alert
-===================
+{{ layout.set() }}
+{{ layout.children(3, 11, use=[(1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8)]) }}
 
-https://github.com/magnus-lycka/mail2alert
+Minimal knowledge...
+====================
 
+* asyncio.get_event_loop()
+* loop.create_task()
+* loop.run_until_complete()
+* loop.run_forever()
+* asyncio.gather()
+* loop.run_in_executor()
 
 ----
+
+{{ layout.set() }}
+
+Minimal knowledge...
+====================
+
+asyncio.get_event_loop()
+------------------------
+
+*You know this by now...*
+
+----
+
+{{ layout.set() }}
+
+Minimal knowledge...
+====================
+
+loop.create_task(coroutine)
+---------------------------
+
+Schedule the execution of a coroutine object: wrap it in a future. Return a Task object.
+
+----
+
+{{ layout.set() }}
+
+Minimal knowledge...
+====================
+
+loop.run_until_complete(coroutine)
+----------------------------------
+
+Pass in a coroutine or a future(task).
+
+----
+
+{{ layout.set() }}
+
+Minimal knowledge...
+====================
+
+loop.run_forever()
+------------------
+
+After you created tasks...
+
+----
+
+{{ layout.set() }}
+
+Minimal knowledge...
+====================
+
+asyncio.gather(coroutines_or_futures, ...)
+------------------------------------------
+
+Return a future aggregating results from the given coroutine objects or futures.
+
+.. code:: python
+
+    import asyncio
+
+    async def factorial(name, number):
+        f = 1
+        for i in range(2, number+1):
+            print("Task %s: Compute factorial(%s)..." % (name, i))
+            await asyncio.sleep(1)
+            f *= i
+        print("Task %s: factorial(%s) = %s" % (name, number, f))
+
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(asyncio.gather(
+        factorial("A", 2),
+        factorial("B", 3),
+        factorial("C", 4),
+    ))
+    loop.close()
+
+----
+
+{{ layout.set() }}
+
+Minimal knowledge...
+====================
+
+loop.run_in_executor(executor, function, args, ...)
+---------------------------------------------------
+
+Call a function in an Executor (pool of threads or pool of processes). By default, an event loop uses a thread pool executor (ThreadPoolExecutor).
+
+Returns a coroutine.
+
+----
+
+{{ layout.set() }}
+
+Some code examples...
+=====================
+
+* Watchdog
+* Parallel fetch
+* https://github.com/magnus-lycka/mail2alert
+
+----
+
+{{ layout.set() }}
+
+Testing with asyncio
+====================
+
+dfgdfg
+
+----
+
+{{ layout.set() }}
+
+Debugging with asyncio
+======================
+
+.. code:: python
+
+    if args.verbose:
+        LOG.info('enabling debugging')
+
+        # Enable debugging
+        event_loop.set_debug(True)
+
+        # Make the threshold for "slow" tasks very very small for
+        # illustration. The default is 0.1, or 100 milliseconds.
+        event_loop.slow_callback_duration = 0.001
+
+        # Report all mistakes managing asynchronous resources.
+        warnings.simplefilter('always', ResourceWarning)
+
+- https://pymotw.com/3/asyncio/debugging.html
+- https://github.com/aio-libs/aiomonitor
+- https://github.com/vxgmichel/aioconsole
+
+----
+
+{{ layout.set() }}
 
 References
 ==========
 
-- https://github.com/pyenv/pyenv-installer
 - https://docs.python.org/3/library/asyncio.html
 - https://github.com/aio-libs
 - https://github.com/magnus-lycka/mail2alert
 - https://github.com/magnus-lycka/gothpy-asyncio
 - https://github.com/MagicStack/uvloop
 - http://lucumr.pocoo.org/2016/10/30/i-dont-understand-asyncio/
+- https://pymotw.com/3/asyncio/
+- https://github.com/timofurrer/awesome-asyncio
+- https://www.youtube.com/watch?v=2ZFFv-wZ8_g
