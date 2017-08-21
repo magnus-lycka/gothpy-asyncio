@@ -1,7 +1,7 @@
 :title: GothPy: Coroutines with async and await
 :data-transition-duration: 500
 :css: gothpy-asyncio.css
-:skip-help: true
+:skip-help: false
 
 ----
 
@@ -22,6 +22,13 @@ Magnus_ Lyckå_
 
 .. _Magnus: https://github.com/magnus-lycka
 .. _Lyckå: https://www.linkedin.com/in/lycka/
+
+----
+
+{{ layout.set() }}
+
+**IRQ**
+=======
 
 ----
 
@@ -292,16 +299,16 @@ Timeline
 ========
 
 * Python 2.x std lib: asyncore & asynchat
-* Python 2.x 3rd party: Greenlets, Twisted etc
-* Python 3.4: asyncio (provisional), @asyncio.coroutine & yield from
-* Python 3.5: async & await syntax
+* Python 2.x 3rd party: Greenlets, Twisted, gevent etc
+* Python 3.4: asyncio (provisional), @asyncio.coroutine
+* Python 3.5: async & await syntax (Borrowed from C# / VB.NET)
 * Python 3.6: asyncio extended & stable. Async generators & comprehensions.
 * Python 3.7: ??? (Simplifications and better docs?) https://www.youtube.com/watch?v=2ZFFv-wZ8_g
 
 ----
 
 {{ layout.set() }}
-{{ layout.children(6, 11, use=[(2, 3), (3, 3), (4, 3), (5, 3), (2, 4), (2, 5), (3, 5), (4, 5), (3, 6), (3,7), (3, 8)]) }}
+{{ layout.children(6, 11, use=[(2, 3), (3, 3), (4, 3), (5, 3), (2, 4), (2, 5), (3, 5), (4, 5), (3, 6), (4, 6), (3,7), (3, 8)]) }}
 
 Asyncio concepts
 ================
@@ -334,9 +341,14 @@ Event Loops
   * SelectorEventLoop - Default, limited to sockets in Windows
   * ProactorEventLoop - Only Windows, IOCP
   * uvloop_ - 3rd party, based on libuv_
+  * tokio_ - 3rd party, based on Rust event loop tokio-rs_.
+
+
 
 .. _uvloop: https://github.com/MagicStack/uvloop
 .. _libuv: https://github.com/libuv/libuv
+.. _tokio: https://pypi.python.org/pypi/tokio
+.. _tokio-rs: https://tokio.rs/
 
 ----
 
@@ -535,6 +547,28 @@ Async generators and comprehension
 {{ layout.set() }}
 
 
+Async for???
+============
+
+.. code:: python
+
+
+    async for i in f():
+        ....
+
+VS
+
+.. code:: python
+
+
+    for i in await f():
+        ....
+
+----
+
+{{ layout.set() }}
+
+
 Synchronization primitives
 ==========================
 
@@ -646,17 +680,33 @@ http://lucumr.pocoo.org/2016/10/30/i-dont-understand-asyncio/
 ----
 
 {{ layout.set() }}
-{{ layout.children(3, 11, use=[(1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8)]) }}
+
+Callback soup considered harmful
+================================
+
+    *Your async/await functions are dumplings of local structure
+    floating on top of callback soup, and this has far-reaching
+    implications for the simplicity and correctness of your code.*
+
+        -- Nathaniel J. Smith
+
+https://vorpus.org/blog/some-thoughts-on-asynchronous-api-design-in-a-post-asyncawait-world/
+
+----
+
+{{ layout.set() }}
+{{ layout.children(3, 12, use=[(1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8)]) }}
 
 Minimal knowledge...
 ====================
 
-* asyncio.get_event_loop()
+* loop = asyncio.get_event_loop()
 * loop.create_task()
 * loop.run_until_complete()
 * loop.run_forever()
 * asyncio.gather()
 * loop.run_in_executor()
+* loop.close()
 
 ----
 
@@ -767,10 +817,48 @@ Some code examples...
 
 {{ layout.set() }}
 
+Some networking libraries
+=========================
+
+* https://github.com/aio-libs/aiohttp
+* https://github.com/aio-libs/aiosmtpd
+* https://github.com/channelcat/sanic
+
+
+* https://github.com/aio-libs/aiozmq
+* https://github.com/Polyconseil/aioamqp
+* https://github.com/aio-libs/aiokafka
+
+----
+
+{{ layout.set() }}
+
+Not only networking...
+======================
+
+* https://github.com/magicstack/asyncpg
+* https://github.com/aio-libs/aiomysql
+* https://github.com/mongodb/motor
+* https://github.com/elastic/elasticsearch-py-async
+* https://github.com/aio-libs/aioredis
+* https://github.com/aio-libs/aiomcache
+
+* https://github.com/Tinche/aiofiles/
+* https://github.com/aio-libs/aiobotocore
+* https://github.com/aio-libs/aiodocker
+
+----
+
+{{ layout.set() }}
+
 Testing with asyncio
 ====================
 
-dfgdfg
+* https://blog.miguelgrinberg.com/post/unit-testing-asyncio-code
+* https://asynctest.readthedocs.io/en/latest/
+* https://github.com/pytest-dev/pytest-asyncio
+* http://aiohttp.readthedocs.io/en/stable/testing.html
+* https://github.com/magnus-lycka/mail2alert/tree/master/src/test
 
 ----
 
@@ -794,9 +882,14 @@ Debugging with asyncio
         # Report all mistakes managing asynchronous resources.
         warnings.simplefilter('always', ResourceWarning)
 
+...
+
+.. code:: bash
+
+    $ export PYTHONASYNCIODEBUG=X
+
 - https://pymotw.com/3/asyncio/debugging.html
 - https://github.com/aio-libs/aiomonitor
-- https://github.com/vxgmichel/aioconsole
 
 ----
 
