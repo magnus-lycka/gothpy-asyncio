@@ -361,6 +361,8 @@ Event Loop objects
 
     loop = asyncio.get_event_loop()
 
+    loop.create_task( coroutine )
+
     loop.run_until_complete( coroutine or task )
 
     loop.run_forever()
@@ -373,7 +375,7 @@ Event Loop objects
 
     loop.close()
 
-    ....
+    ...
 
 ----
 
@@ -700,7 +702,7 @@ https://vorpus.org/blog/some-thoughts-on-asynchronous-api-design-in-a-post-async
 Minimal knowledge...
 ====================
 
-* loop = asyncio.get_event_loop()
+* asyncio.get_event_loop()
 * loop.create_task()
 * loop.run_until_complete()
 * loop.run_forever()
@@ -712,11 +714,8 @@ Minimal knowledge...
 
 {{ layout.set() }}
 
-Minimal knowledge...
-====================
-
 asyncio.get_event_loop()
-------------------------
+========================
 
 *You know this by now...*
 
@@ -724,23 +723,19 @@ asyncio.get_event_loop()
 
 {{ layout.set() }}
 
-Minimal knowledge...
-====================
-
 loop.create_task(coroutine)
----------------------------
+===========================
 
-Schedule the execution of a coroutine object: wrap it in a future. Return a Task object.
+Schedule the execution of a coroutine object.
+
+Wrap it in a task object and return that task.
 
 ----
 
 {{ layout.set() }}
 
-Minimal knowledge...
-====================
-
 loop.run_until_complete(coroutine)
-----------------------------------
+==================================
 
 Pass in a coroutine or a future(task).
 
@@ -748,11 +743,8 @@ Pass in a coroutine or a future(task).
 
 {{ layout.set() }}
 
-Minimal knowledge...
-====================
-
 loop.run_forever()
-------------------
+==================
 
 After you created tasks...
 
@@ -760,11 +752,8 @@ After you created tasks...
 
 {{ layout.set() }}
 
-Minimal knowledge...
-====================
-
 asyncio.gather(coroutines_or_futures, ...)
-------------------------------------------
+==========================================
 
 Return a future aggregating results from the given coroutine objects or futures.
 
@@ -792,11 +781,8 @@ Return a future aggregating results from the given coroutine objects or futures.
 
 {{ layout.set() }}
 
-Minimal knowledge...
-====================
-
 loop.run_in_executor(executor, function, args, ...)
----------------------------------------------------
+===================================================
 
 Call a function in an Executor (pool of threads or pool of processes). By default, an event loop uses a thread pool executor (ThreadPoolExecutor).
 
@@ -870,7 +856,7 @@ Debugging with asyncio
 .. code:: python
 
     if args.verbose:
-        LOG.info('enabling debugging')
+        logging.getLogger('asyncio').setLevel(logging.DEBUG)
 
         # Enable debugging
         event_loop.set_debug(True)
@@ -886,7 +872,7 @@ Debugging with asyncio
 
 .. code:: bash
 
-    $ export PYTHONASYNCIODEBUG=X
+    $ export PYTHONASYNCIODEBUG=1
 
 - https://pymotw.com/3/asyncio/debugging.html
 - https://github.com/aio-libs/aiomonitor
