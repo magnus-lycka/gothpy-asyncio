@@ -89,5 +89,4 @@ ENV/
 .ropeproject
 
 .idea
-docs/html
 docs/temp.rst
