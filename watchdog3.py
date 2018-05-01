@@ -3,20 +3,21 @@ import asyncio
 
 def bark(task):
     print('Woof!!!')
+    task = asyncio.Task.current_task()
     task.cancel()
 
 
 async def might_time_out(loop, timeout=3):
     delay = 1
+    task = asyncio.Task.current_task()
     while 1:
-        task = asyncio.Task.current_task()
         watchdog = loop.call_later(timeout, bark, task)
         try:
             await asyncio.sleep(delay)
             watchdog.cancel()
             print('Slept', delay, 'seconds')
         except asyncio.CancelledError:
-            print('Bugger...')
+            print('Ouch...')
             return
         delay *= 2
 
